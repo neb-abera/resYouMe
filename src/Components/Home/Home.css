@@ -3,9 +3,21 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  
 }
 
+.aiPicture {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.searchbar {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 /* .logo {
   height: 6em;
   padding: 1.5em;
@@ -34,10 +46,10 @@
   }
 } */
 
-.card {
+/* .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
-}
+} */

@@ -1,20 +1,18 @@
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import Home from './Components/Home/Home';
-import Login from './Components/Login/Login';
-import './App.css';
+import reactLogo from './assets/react.svg';
+import OpenAIForm from '../OpenAIForm';
+import Question from './Question';
+import './Quiz.css';
 
-const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
-  );
+const Quiz = (questions: any) => {
+  const questionsList = questions.map((question: any) => (
+    <Question key={question.id} question={question} />
+  ));
+  return <ul>{questionsList}</ul>;
 };
 
-export default App;
+export default Quiz;
 
 // import { Configuration, OpenAIApi } from 'openai';
 // const configuration = new Configuration({

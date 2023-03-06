@@ -123,3 +123,7 @@
 // npm packages for styling
 // npm install --save-dev node-sass sass-loader svg-url-loader
 // npm install sass-loader style-loader css-loader
+
+// old command to run server // npx nodemon src/server/server.ts
+
+// command using ts-node to run server is 
