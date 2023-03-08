@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import Button from '@mui/material/Button';
-import reactLogo from './assets/react.svg';
-import OpenAIForm from '../OpenAIForm';
-import Question from './Question';
+// import { useState } from 'react';
+// import Button from '@mui/material/Button';
+// import reactLogo from './assets/react.svg';
+// import OpenAIForm from '../OpenAIForm';
+// import Question from './Question';
 import './Quiz.css';
+import Question from './Question';
 
-const Quiz = (questions: any) => {
+const Quiz = ({ questions }: any) => {
   const questionsList = questions.map((question: any) => (
     <Question key={question.id} question={question} />
   ));
-  return <ul>{questionsList}</ul>;
+  return <ul key="ulQuiz">{questionsList}</ul>;
 };
 
 export default Quiz;
