@@ -3,7 +3,7 @@
 ## Multi Factor Authentication (MFA) using Okta
 ![signin](public/signin.gif)
 
-## Questions from questionAPI with answers from OpenAI API
+## Questions from quiz API with answers from OpenAI API
 ![get questions](public/get_questions.gif)
 
 ## Ask your own questions routed to OpenAI API
