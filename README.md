@@ -1,6 +1,6 @@
 # resYouMe: OpenAI powered study assistant
 
-## Authentication using Okta
+## Multi Factor Authentication (MFA) using Okta
 ![signin](public/signin.gif)
 
 ## Questions from questionAPI with answers from OpenAI API
