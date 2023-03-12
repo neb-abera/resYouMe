@@ -6,7 +6,7 @@
 ## Questions from questionAPI with answers from OpenAI API
 ![get questions](public/get_questions.gif)
 
-## Ask your own questions routed to Open AI API
+## Ask your own questions routed to OpenAI API
 ![ask a question](public/ask_question.gif)
 
 ## Image generation using OpenAI API
