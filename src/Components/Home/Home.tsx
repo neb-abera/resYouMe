@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
+import { Link, useHistory } from 'react-router-dom';
+import { useOktaAuth } from '@okta/okta-react';
 import './Home.css';
 import { ThemeProvider } from '@emotion/react';
 import axios from 'axios';
@@ -61,6 +63,29 @@ const Home = () => {
   const [request, setRequest] = useState('');
   const [apiResponse, setApiResponse] = useState('');
   const [quiz, setQuiz] = useState([]);
+  const { authState, oktaAuth } = useOktaAuth();
+  const history = useHistory();
+  const [userEmail, setUserEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  if (!authState) {
+    return <h1>Loading...</h1>;
+  }
+
+  oktaAuth.token
+    .getUserInfo()
+    .then((info) => {
+      setUserEmail(info.email);
+      setFirstName(info.given_name);
+      setLastName(info.family_name);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  const handleLogin = async () => history.push('/login');
+  const handleLogout = async () => oktaAuth.signOut();
 
   const handlePictureClick = () => {
     console.log('picture clicked');
@@ -141,6 +166,22 @@ const Home = () => {
 
   return (
     <div className="Home">
+      <div className="Home-header">
+        <h1>Hi {firstName}!</h1>
+        <h2>Welcome to your AI powered study assistant</h2>
+        <div className="Home-buttons">
+          {/* <Link to="/">Home</Link> */}
+          {authState.isAuthenticated ? (
+            <button id="logout-button" type="button" onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <button id="login-button" type="button" onClick={handleLogin}>
+              Login
+            </button>
+          )}
+        </div>
+      </div>
       <div className="services">
         <h1>What do you want to do?</h1>
         <Button variant="outlined" onClick={handleQuizClick}>
@@ -181,7 +222,7 @@ const Home = () => {
       {apiResponse !== '' && questionClicked ? (
         <div>
           <h2>The answer is </h2>
-          <h3>{apiResponse}</h3>
+          <h3 className="answer">{apiResponse}</h3>
         </div>
       ) : null}
       {apiResponse !== '' && pictureClicked ? (

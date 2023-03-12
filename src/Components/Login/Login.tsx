@@ -1,58 +1,35 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useOktaAuth } from '@okta/okta-react';
 import Button from '@mui/material/Button';
-import reactLogo from './assets/react.svg';
+import OktaSignInWidget from '../OktaSignInWidget';
+// import reactLogo from './assets/react.svg';
 import OpenAIForm from '../OpenAIForm';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ config }) => {
   const [count, setCount] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [choseGuest, setChoseGuest] = useState(false);
+  const { oktaAuth, authState } = useOktaAuth();
 
-  const handleLoginClick = () => {
-    console.log('login clicked');
-    setLoggedIn(true);
+  const onSuccess = (tokens: any) => {
+    oktaAuth.handleLoginRedirect(tokens);
   };
-  const handleSignupClick = () => {
-    console.log('signup clicked');
+
+  const onError = (err: any) => {
+    // console.log('Sign in error', err);
   };
-  const handleGuestClick = () => {
-    console.log('guest clicked');
-    setChoseGuest(true);
-  };
-  return (
-    <div className="Login">
-      <div>
-        {loggedIn || choseGuest ? null : (
-          <>
-            <h1>resYouMe</h1>
-            <h2>Your AI powered </h2>
-            <Button variant="outlined" onClick={handleLoginClick}>
-              Log-in
-            </Button>
-            <Button variant="outlined" onClick={handleSignupClick}>
-              Sign-up
-            </Button>
-            <Button variant="outlined" onClick={handleGuestClick}>
-              Use as Guest
-            </Button>
-          </>
-        )}
-        {choseGuest ? <OpenAIForm /> : null}
-      </div>
-    </div>
+
+  if (!authState) {
+    return <div>Loading...</div>;
+  }
+
+  return authState.isAuthenticated ? (
+    <Redirect to={{ pathname: '/' }} />
+  ) : (
+    <OktaSignInWidget config={config} onSuccess={onSuccess} onError={onError} />
   );
 };
 
 export default Login;
-
-// import { Configuration, OpenAIApi } from 'openai';
-// const configuration = new Configuration({
-//   organization: 'org-FWuxFAgymlykB0QZAteFZmNY',
-//   apiKey: process.env.OPENAI_API_KEY
-// });
-// const openai = new OpenAIApi(configuration);
-// const response = await openai.listEngines();
-
-// GET https://api.openai.com/v1/models
-// 'Authorization: Bearer YOUR_API_KEY';

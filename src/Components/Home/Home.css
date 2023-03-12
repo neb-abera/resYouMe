@@ -18,6 +18,10 @@
   object-fit: cover;
   object-position: center;
 }
+
+.answer {
+  color: lightblue
+}
 /* .logo {
   height: 6em;
   padding: 1.5em;
