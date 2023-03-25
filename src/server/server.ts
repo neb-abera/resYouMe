@@ -20,8 +20,8 @@ app.use(express.json());
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-console.log(__filename);
-console.log(__dirname);
+// console.log(__filename);
+// console.log(__dirname);
 // app.use('/', express.static(path.join(__dirname, '../client')));
 
 // console.log(process.env.PORT);
@@ -41,11 +41,11 @@ const quizAuth = { headers: { 'x-api-key': process.env.QUIZAPI_KEY } };
 
 // handle post requests from frontend for api request to openai for completion
 app.get('/completion', (req, res) => {
-  console.log('in completion route');
+  // console.log('in completion route');
   const query = req.query.prompt;
-  console.log('query', query);
+  // console.log('query', query);
   const prompt = `I'm a professional and I am an expert in the field. I want precise answers with no fluff that wastes my tokens. The prompt I want you to answer is as follows. ${query}`;
-  console.log('prompt', prompt);
+  // console.log('prompt', prompt);
   const request = {
     model: 'text-davinci-003',
     max_tokens: 2048,
@@ -59,8 +59,8 @@ app.get('/completion', (req, res) => {
   axios
     .post('https://api.openai.com/v1/completions', request, openAIAuth)
     .then((response) => {
-      console.log(response.data);
-      console.log(response.data.choices[0].text);
+      // console.log(response.data);
+      // console.log(response.data.choices[0].text);
       const finalAnswer = response.data.choices[0].text.replace(/\n/g, '');
       res.send(finalAnswer);
       // res.sendStatus(200);
@@ -84,7 +84,7 @@ app.get('/image', (req, res) => {
   axios
     .post('https://api.openai.com/v1/images/generations', request, openAIAuth)
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       res.send(response.data);
       // res.sendStatus(200);
     })
@@ -95,7 +95,7 @@ app.get('/image', (req, res) => {
 });
 
 app.get('/quiz', (req, res) => {
-  console.log('in quiz route');
+  // console.log('in quiz route');
   axios
     .get('https://quizapi.io/api/v1/questions', quizAuth)
     .then((response) => {
