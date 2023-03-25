@@ -1,6 +1,6 @@
 # resYouMe: OpenAI powered study assistant
 
-I'm currently rebuilding the backend of this application in C++ using [drogon](https://www.techempower.com/benchmarks/#section=data-r21) which is currently the fastest web framework in the world
+This application is feature complete and I am now focused on vertically and horizontally scaling this application. I'm currently rebuilding the backend of this application in C++ using [drogon](https://www.techempower.com/benchmarks/#section=data-r21) which is currently the fastest web framework in the world. I will then rebuild it in ASP.NET core so that I can benchmark the three frameworks
 
 
 ## Multi Factor Authentication (MFA) using Okta
